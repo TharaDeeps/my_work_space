@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Slideshow</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; text-align: center; }
+        .slideshow-container {
+            max-width: 400px;
+            margin: 60px auto;
+            background: #fff;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        button {
+            padding: 8px 20px;
+            font-size: 1em;
+            border-radius: 6px;
+            border: none;
+            background: #007bff;
+            color: #fff;
+            cursor: pointer;
+            margin: 0 8px;
+        }
+        button:active { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="slideshow-container">
+        <img id="slideImg" src="https://picsum.photos/id/1015/400/220" alt="Slideshow Image">
+        <br>
+        <button onclick="prevImage()">Prev</button>
+        <button onclick="nextImage()">Next</button>
+    </div>
+    <script>
+        const images = [
+            "https://picsum.photos/id/1015/400/220",
+            "https://picsum.photos/id/1025/400/220",
+            "https://picsum.photos/id/1035/400/220",
+            "https://picsum.photos/id/1045/400/220",
+            "https://picsum.photos/id/1055/400/220"
+        ];
+        let current = 0;
+
+        function showImage(idx) {
+            document.getElementById('slideImg').src = images[idx];
+        }
+
+        function prevImage() {
+            current = (current - 1 + images.length) % images.length;
+            showImage(current);
+        }
+
+        function nextImage() {
+            current = (current + 1) % images.length;
+            showImage(current);
+        }
+        </script>
+        </body>
+        </html>

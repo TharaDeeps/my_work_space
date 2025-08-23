@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Program</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; }
+        .quiz-container {
+            max-width: 400px;
+            margin: 60px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .question { font-size: 1.2em; margin-bottom: 20px; }
+        .options { margin-bottom: 20px; }
+        .options label { display: block; margin-bottom: 10px; }
+        .result { font-weight: bold; margin-top: 20px; }
+        button { padding: 10px 20px; font-size: 1em; border-radius: 6px; border: none; background: #007bff; color: #fff; cursor: pointer; }
+        button:active { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div id="question" class="question"></div>
+        <form id="optionsForm" class="options"></form>
+        <button id="nextBtn">Next</button>
+        <div id="result" class="result"></div>
+    </div>
+    <script>
+        const quiz = [
+            {
+                question: "What is the capital of France?",
+                options: ["Berlin", "London", "Paris", "Madrid"],
+                answer: 2
+            },
+            {
+                question: "Which planet is known as the Red Planet?",
+                options: ["Earth", "Mars", "Jupiter", "Venus"],
+                answer: 1
+            },
+            {
+                question: "Who wrote 'Romeo and Juliet'?",
+                options: ["Charles Dickens", "William Shakespeare", "Mark Twain", "Jane Austen"],
+                answer: 1
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            document.getElementById('result').textContent = '';
+            const q = quiz[currentQuestion];
+            document.getElementById('question').textContent = q.question;
+            const optionsForm = document.getElementById('optionsForm');
+            optionsForm.innerHTML = '';
+            q.options.forEach((opt, idx) => {
+                const label = document.createElement('label');
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = 'option';
+                radio.value = idx;
+                label.appendChild(radio);
+                label.appendChild(document.createTextNode(opt));
+                optionsForm.appendChild(label);
+            });
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', function() {
+            const selected = document.querySelector('input[name="option"]:checked');
+            if (!selected) {
+                document.getElementById('result').textContent = 'Please select an option.';
+                return;
+            }
+            if (parseInt(selected.value) === quiz[currentQuestion].answer) {
+                score++;
+                document.getElementById('result').textContent = 'Correct!';
+            } else {
+                document.getElementById('result').textContent = 'Wrong!';
+            }
+            currentQuestion++;
+            setTimeout(() => {
+                if (currentQuestion < quiz.length) {
+                    loadQuestion();
+                } else {
+                    document.getElementById('question').textContent = 'Quiz Completed!';
+                    document.getElementById('optionsForm').innerHTML = '';
+                    document.getElementById('nextBtn').style.display = 'none';
+                    document.getElementById('result').textContent = `Your score: ${score} / ${quiz.length}`;
+                }
+            }, 1000);
+        });
+
+        loadQuestion();
+    </script>
+</body>
+</html>
