@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //count odd and even numbers in array
+
+const arr_num =[1,6,55,90,32,54,31, 20];
+let odd=0;
+let even=0;
+let len = arr_num.length;
+
+for(i=0;i<len;i++){
+    if(arr_num[i]%2 == 0){
+        even+=1;
+    }
+    else{
+        odd+=1;
+    }
+}
+console.log(odd +" is odd " + "and " +even+" is even")
+    </script>
+    
+</body>
+</html>

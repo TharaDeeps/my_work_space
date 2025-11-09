@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+</head>
+<style>
+    form{
+        width: 300px;
+        height: 500px;
+        margin-left: 39%;
+        margin-top: 10%;
+        padding: 10px;
+    }
+    b{
+        font-size: 22px;
+        color: Red;
+        
+        }
+</style>
+<body>
+<!-- Simple Age Calculator using DOM -->
+ <script>
+    function myAge(){
+        let result = document.getElementById("age").value;
+       
+        
+        let agee = new Date();
+        let age  = agee.getFullYear() ;
+        let ans= parseInt(age) - parseInt(result);
+        
+        console.log(result);         
+        alert("Your age is "+  ans);
+        }
+ </script>
+
+<form>
+    <fieldset>
+        <legend><b><u>How old are you?</u></b></legend>
+        <label>Your Birth Year:</label>
+        <br>
+        <input type="text" id="age" >
+        <br>
+        <button onclick="myAge()">Click Me</button>
+        <br>
+        <p>See the top!</p>
+
+        
+    </fieldset>
+</form>
+   
+</body>
+</html>

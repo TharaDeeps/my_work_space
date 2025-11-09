@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //Find Maximum in an array
+
+const a=[10,6, 28, 3, 2, 80];
+console.log("Max number in an array is " + Math.max(...a))
+console.log("Min is " + Math.min(...a))
+
+
+let mx = a[0];
+
+for (let i = 1;i<=a.length;i++){
+    if(a[i]>mx){
+        mx = a[i];
+    }
+}
+console.log(mx)
+    </script>
+    
+</body>
+</html>

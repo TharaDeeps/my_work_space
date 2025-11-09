@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driving Eligiblity </title>
+</head>
+<style>
+    h1{
+        color: Blue;
+        text-align: center;
+        
+
+    }
+    label{
+        margin-left: 38%;
+    }
+</style>
+<body>
+    <script>
+        function myEligibility(){
+            let age = document.getElementById("value").value;
+            if(age>=18){
+                alert("You're eligible to drive");
+            }
+            else{
+                alert("You're not eligible to drive");
+            }
+
+        }
+    </script>
+    <h1>Driving Eligiblity Test</h1>
+    <label>Enter your age :</label>
+    <input type="text" id="value">
+    <button onclick="myEligibility()">Click</button>
+    
+</body>
+</html>

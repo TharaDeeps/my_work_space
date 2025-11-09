@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Timer Application</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f2f2f2; }
+        .timer-container {
+            max-width: 300px;
+            margin: 80px auto;
+            background: #fff;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+        .display {
+            font-size: 2.5em;
+            margin-bottom: 24px;
+            letter-spacing: 2px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 6px;
+            border: none;
+            background: #007bff;
+            color: #fff;
+            cursor: pointer;
+            margin: 0 8px;
+        }
+        button:active { background: #0056b3; }
+        input[type="number"] {
+            width: 60px;
+            padding: 6px;
+            font-size: 1em;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin: 0 4px 16px 4px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="timer-container">
+        <div>
+            <input type="number" id="minutes" min="0" placeholder="Min">
+            <input type="number" id="seconds" min="0" max="59" placeholder="Sec">
+        </div>
+        <div id="display" class="display">00:00</div>
+        <button onclick="startTimer()">Start</button>
+        <button onclick="pauseTimer()">Pause</button>
+        <button onclick="resetTimer()">Reset</button>
+    </div>
+    <script>
+        let timer;
+        let totalSeconds = 0;
+        let remainingSeconds = 0;
+        let isPaused = false;
+
+        function updateDisplay() {
+            const min = String(Math.floor(remainingSeconds / 60)).padStart(2, '0');
+            const sec = String(remainingSeconds % 60).padStart(2, '0');
+            document.getElementById('display').textContent = `${min}:${sec}`;
+        }
+
+        function startTimer() {
+            if (timer) return;
+            if (!isPaused) {
+                const minutes = parseInt(document.getElementById('minutes').value) || 0;
+                const seconds = parseInt(document.getElementById('seconds').value) || 0;
+                totalSeconds = minutes * 60 + seconds;
+                if (totalSeconds <= 0) {
+                    alert("Please enter a valid time.");
+                    return;
+                }
+                remainingSeconds = totalSeconds;
+            }
+            isPaused = false;
+            timer = setInterval(() => {
+                if (remainingSeconds > 0) {
+                    remainingSeconds--;
+                    updateDisplay();
+                } else {
+                    clearInterval(timer);
+                    timer = null;
+                    updateDisplay();
+                    alert("Time's up!");
+                }
+            }, 1000);
+            updateDisplay();
+        }
+
+        function pauseTimer() {
+            if (timer) {
+                clearInterval(timer);
+                timer = null;
+                isPaused = true;
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timer);
+            timer = null;
+            isPaused = false;
+            remainingSeconds = 0;
+            updateDisplay();
+            document.getElementById('minutes').value = '';
+            document.getElementById('seconds').value = '';
+        }
+        updateDisplay();
+    </script>
+</body>
+</html>
